@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>User Skills and Levels</h1>
+
+<table border="5" cellpadding="5" >
+	<thead>
+		<tr>
+			<th>Student</th>
+			<th>Skill</th>
+			<th>Years</th>
+			<th>Formal?</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @users.each do |user| %>
+			<% user.proficiencies.each_with_index do |pro, index| %>
+			  <tr>
+				  <td><%= user.name if index == 0 %></td>
+				  <td><%= pro.skill.name %></td>
+				  <td><%= pro.years %></td>
+				  <td><%= pro.formal %></td>
+				</tr>
+			<% end %>
+		<% end %>
+	</tbody>
+
+</table>
+</div>
+			
