@@ -14,15 +14,13 @@
 		<% @users.each do |user| %>
 			<% user.proficiencies.each_with_index do |pro, index| %>
 			  <tr>
-				  <td><%= user.name if index == 0 %></td>
-				  <td><%= pro.skill.name %></td>
+				  <td><a href="/user/<%= user.id %>"><%= user.name if index == 0 %></a></td>
+				  <td><%= "#{pro.skill.name} (#{pro.skill.context})" %></td>
 				  <td><%= pro.years %></td>
 				  <td><%= pro.formal %></td>
 				</tr>
 			<% end %>
 		<% end %>
 	</tbody>
-
 </table>
 </div>
-			

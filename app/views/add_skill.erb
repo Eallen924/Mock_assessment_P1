@@ -1,0 +1,20 @@
+<div class="container">
+	<h1>Add Additional Skills:</h1>
+	<form id="add_skill" method="post" action="/add_skill">
+	<table>
+		<th>Skills</th>
+		<th>Years Experience</th>
+		<th>Formal Education?</th>
+		<tr>
+			<td><select name="skill[name]" class="styled-select">
+			<% @addable_skills.each do |skill| %>
+				<option ><%=skill.name%></option>
+			<% end %>
+			</select></td>
+			<td><input type="text" name="skill[years]" placeholder="Enter a Number" ></td>
+			<td><input type="text" name="skill[formal]" placeholder="(true / false)"></td>
+		</tr>
+	</table>
+	<div class="submit"><input type="submit" value="Add Skills"></div>
+</form>
+</div>

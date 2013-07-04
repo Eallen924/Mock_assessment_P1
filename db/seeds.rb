@@ -1,3 +1,4 @@
+
 require 'faker'
 
 # create a few users
@@ -23,7 +24,7 @@ user_ids = (1..5).to_a
 skill_ids = (1..10).to_a
 # TODO: create associations between users and skills
 
-proficiency_true_or_false = %w(True False)
+proficiency_true_or_false = [0,1]
 
 25.times do |proficiency|
 	Proficiency.create(:user_id => user_ids.sample,

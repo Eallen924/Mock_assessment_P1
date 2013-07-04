@@ -1,0 +1,51 @@
+<div class="container">
+
+	<form id="update_user" method="post" action="/update/<%= current_user.id %>">
+		<label class="label" for="name">Name</label>
+		<input type="text" name="user[name]" value="<%= current_user.name %>">
+		<span id="name-errors" class="errors"></span>
+		<br>
+
+		<label class="label" for="email">Email</label>
+		<input type="email" name="user[email]" value="<%= current_user.email %>">
+		<span id="email-errors" class="errors"></span>
+		<br>
+
+		<label class="label" for="password">Old Password</label>
+		<input type="password" name="user[old_password]" placeholder="Old Password">
+		<span id="entered_password-errors" class="errors"></span>
+		<br>
+
+		<label class="label" for="password">New Password</label>
+		<input type="password" name="user[new_password]" placeholder="New Password">
+		<span id="entered_password-errors" class="errors"></span>
+		<br>
+
+		<label class="label" for="password">New Password Confirmation</label>
+		<input type="password" name="user[new_password_confirmation]" placeholder="Confirm Password">
+		<span id="entered_password_errors" class="errors"></span>
+		<div class="skills_table">
+			<table>
+				<th>Skills</th>
+				<th>Years</th>
+				<th>Formal Education?</th>
+				<tr>
+					<% current_user.proficiencies.each do |proficiency| %>
+					<td><label><%= proficiency.skill.name %></label></td>
+					<td><input type="text" name="proficiencies[<%= proficiency.id %>][years]" value="<%= proficiency.years %>"></td>
+					<td><input type="text" name="proficiencies[<%= proficiency.id %>][formal]" value="<%= proficiency.formal %>"></td>
+					<td><a href="/delete_skill/<%=proficiency.id%>">Delete</a></td>
+				</tr>
+				<% end %>
+					<!-- <td><a href="/add_skill/<%=current_user.id%>">Add Skill - 1</a></td> -->
+			</table>
+				<div class="add_skill">
+					<a href="/add_skill">Add Skill</a>
+				</div>
+		</div>
+		<span id="entered_password-errors" class="errors"></span>
+		<br>
+		<div class="submit"><input type="submit" value="Update"></div>
+	</form>
+
+</div>

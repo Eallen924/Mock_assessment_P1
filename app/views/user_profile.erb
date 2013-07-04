@@ -1,0 +1,22 @@
+<div class="container">
+	<h1><%= @user.name %> Skills and Levels</h1>
+
+	<table border="5" cellpadding="5" >
+		<thead>
+			<tr>
+				<th>Skill</th>
+				<th>Years</th>
+				<th>Formal?</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @user.proficiencies.each_with_index do |pro, index| %>
+			<tr>
+				<td><%= "#{pro.skill.name} (#{pro.skill.context})" %></td>
+				<td><%= pro.years %></td>
+				<td><%= pro.formal %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

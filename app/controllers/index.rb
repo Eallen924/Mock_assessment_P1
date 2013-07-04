@@ -1,8 +1,10 @@
 get '/' do
-  # render home page
-  @users = User.all
-
-  erb :index
+  if current_user
+    @users = User.all
+    erb :index
+  else
+    erb :sign_in
+  end
 end
 
 #----------- SESSIONS -----------
@@ -20,7 +22,8 @@ post '/sessions' do
   if user
     # successfully authenticated; set up session and redirect
     session[:user_id] = user.id
-    redirect '/'
+    @users = User.all
+    erb :index
   else
     # an error occurred, re-render the sign-in form, displaying an error
     @error = "Invalid email or password."
