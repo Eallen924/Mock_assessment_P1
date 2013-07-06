@@ -6,13 +6,13 @@
 		<th>Years Experience</th>
 		<th>Formal Education?</th>
 		<tr>
-			<td><select name="skill[name]" class="styled-select">
+			<td><select name="skill[skill_id]" class="styled-select">
 			<% @addable_skills.each do |skill| %>
-				<option ><%=skill.name%></option>
+				<option value="<%= skill.id %>"><%=skill.name%></option>
 			<% end %>
 			</select></td>
 			<td><input type="text" name="skill[years]" placeholder="Enter a Number" ></td>
-			<td><input type="text" name="skill[formal]" placeholder="(true / false)"></td>
+			<td><input type="checkbox" name="skill[formal]" value="true"></td>
 		</tr>
 	</table>
 	<div class="submit"><input type="submit" value="Add Skills"></div>

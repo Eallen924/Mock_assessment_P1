@@ -7,6 +7,14 @@ class Skill < ActiveRecord::Base
   has_many :users, :through => :proficiencies
   has_many :proficiencies
 
+  def self.addable_by(user)
+    if user.skill_ids.length > 0
+      where("id NOT IN (?)", user.skill_ids)
+    else
+      all
+    end
+  end
+
   private
   def validate_context
     p self.context

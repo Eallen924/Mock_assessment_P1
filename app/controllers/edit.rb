@@ -23,51 +23,44 @@ get '/delete_skill/:skill_id' do
 end
 
 post '/add_skill' do
-	skill_to_add_id = Skill.find_by_name(params[:skill][:name]).id
-	if params[:skill][:formal].downcase == 'true'
-		skill_to_add_formal = 1
-	else
-		skill_to_add_formal = 0
-	end
-
-	Proficiency.create('user_id' => current_user.id,
-										 'skill_id' => skill_to_add_id,
-										 'years' => params[:skill][:years],
-										 'formal' => skill_to_add_formal)
+	# skill_to_add_id = Skill.find_by_name(params[:skill][:name]).id
+	p params
+	current_user.proficiencies.create(params[:skill])#'user_id' => current_user.id,
+										 # 'skill_id' => skill_to_add_id,
+										 # 'years' => params[:skill][:years],
+										 # 'formal' => params[:skill][:formal])
 	redirect "/user/edit/#{current_user.id}"
 end
 
 get '/add_skill' do
-	skills = Skill.all
-	user_skills = User.find(current_user.id).skills
-	@addable_skills = skills - user_skills
+	@addable_skills = Skill.addable_by(current_user)
 	erb :add_skill
 end
 
 post '/update/:user_id' do
 	p params[:user]
-	if User.authenticate(current_user.email, params[:user][:old_password])
-		# go ahead with edits
- 	else
-		@errors = current_user.errors.full_messages
-	end
+	# if User.authenticate(current_user.email, params[:user][:old_password])
+	# 	# go ahead with edits
+ # 	else
+	# 	@errors = current_user.errors.full_messages
+	# end
 
-	if params[:user][:new_password] == params[:user][:new_password_confirmation]
-		params[:user][:password] = params[:user][:new_password]
-	else
-		@errors = "New Password Does Not Match"
-		p @errors
-		erb :edit_profile
-	end
-	current_user.update_attributes({'name' => params[:user][:name],
-																 'email' => params[:user][:email],
-																 'password' => params[:user][:password]})
+	# if params[:user][:new_password] == params[:user][:new_password_confirmation]
+	# 	params[:user][:password] = params[:user][:new_password]
+	# else
+	# 	@errors = "New Password Does Not Match"
+	# 	p @errors
+	# 	erb :edit_profile
+	# end
 
+	current_user.update_attributes(params[:user])
+	p current_user.errors.full_messages
 	params[:proficiencies].each do |id, p_params|
 		proficiency_to_update = current_user.proficiencies.find(id)
 		if proficiency_to_update
 			proficiency_to_update.update_attributes(p_params)
 		end
 	end
+
 	redirect "/user/edit/#{current_user.id}"
 end

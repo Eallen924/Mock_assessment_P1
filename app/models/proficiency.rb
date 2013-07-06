@@ -5,4 +5,12 @@ class Proficiency < ActiveRecord::Base
 
 	belongs_to :skill
 	belongs_to :user
+
+	def formal=(formal)
+		if formal.is_a? String
+			write_attribute(:formal, formal.downcase == "true")
+		else
+			super
+		end
+	end
 end

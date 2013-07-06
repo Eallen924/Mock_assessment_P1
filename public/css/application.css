@@ -1,14 +1,14 @@
 .container {
-  margin: 20px auto;
+  margin: 30px auto;
   width: 800px;
-  padding: 0px 20px 20px 20px;
+  padding: 20px 20px 20px 20px;
   border: 1px dotted black;
   background-color: #D8D8D8;
+  border-radius: 10px;
 }
 
 .container h1 {
   font-size: 17pt;
-
 }
 
 nav {
@@ -64,6 +64,7 @@ th {
 }
 
 td label{
+  margin-right: 15px;
   float: left;
 }
 
@@ -89,6 +90,7 @@ input {
 
 td {
   width: 200px;
+  margin-right: 15px;
   text-align: left;
   vertical-align: top;
 }
@@ -107,6 +109,7 @@ form.quirks {
 
 .submit {
   text-align: center;
+  border-radius: 8px;
 }
 
 .label {
@@ -114,5 +117,5 @@ form.quirks {
   font-weight: bold;
   float: left;
   text-align: left;
-  width: 184px;
+  width: 194px;
 }
